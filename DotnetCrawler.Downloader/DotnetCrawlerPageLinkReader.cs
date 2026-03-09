@@ -74,5 +74,10 @@ namespace DotnetCrawler.Downloader
 
             return result.SelectMany(x => x).Distinct();
         }
-    }
+
+        //find all links in the page, and then find all links in these pages, and so on, until the specified level is reached.
+        public async Task<IEnumerable<string>> GetAllLinks(string url, int level)
+        {
+            return await GetLinks(url, level);  
+        }
 }
