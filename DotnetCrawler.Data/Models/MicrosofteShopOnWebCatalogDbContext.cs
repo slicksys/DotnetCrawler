@@ -27,8 +27,9 @@ namespace DotnetCrawler.Data.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Microsoft.eShopOnWeb.CatalogDb;Trusted_Connection=True;");
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=(localdb)\\ProjectModels;Database=Microsoft.eShopOnWeb.CatalogDb;Trusted_Connection=True;");
+                                                    //Data Source=(localdb)\ProjectModels;Initial Catalog=Microsoft.eShopOnWeb.Identity;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30
             }
         }
 
@@ -54,7 +55,7 @@ namespace DotnetCrawler.Data.Models
                 entity.HasIndex(e => e.CatalogTypeId);
 
                 //entity.Property(e => e.Id).ValueGeneratedNever();
-                entity.Property(e => e.Id).ForSqlServerUseSequenceHiLo("catalog_hilo").IsRequired();
+                entity.Property(e => e.Id).UseHiLo("catalog_hilo").IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
