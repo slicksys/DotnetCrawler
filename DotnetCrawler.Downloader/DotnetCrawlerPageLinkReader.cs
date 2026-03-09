@@ -52,15 +52,15 @@ namespace DotnetCrawler.Downloader
                 var htmlDocument = await web.LoadFromWebAsync(url);
 
                 var linkList = htmlDocument.DocumentNode
-                                   .Descendants("a")
-                                   .Select(a => a.GetAttributeValue("href", null))
-                                   .Where(u => !string.IsNullOrEmpty(u))
-                                   .Distinct();
+                                   .Descendants("a");
+                                   //.Select(a => a.GetAttributeValue("href", null))
+                                   //.Where(u => !string.IsNullOrEmpty(u))
+                                   //.Distinct();
 
-                if (_regex != null)
-                    linkList = linkList.Where(x => _regex.IsMatch(x));
+               /// if (_regex != null)
+            //        linkList = linkList.Where(x => _regex.IsMatch(x));
 
-                return linkList;
+            return linkList.Select(a => a.GetAttributeValue("href", null));
             }
             catch (Exception exception)
             {
